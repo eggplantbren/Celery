@@ -1,7 +1,7 @@
 Celery
 ======
 
-DNest4 + Celerite
+DNest4 + Celerite = Celery
 
 (c) 2017 Brendon J. Brewer
 

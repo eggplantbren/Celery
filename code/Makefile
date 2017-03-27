@@ -4,9 +4,11 @@
 CC = g++
 CXXFLAGS = -std=c++11 -O3 -Wall -Wextra -pedantic -DNDEBUG
 LIBS = -ldnest4 -lpthread
+CELERITE_INCLUDE_PATH=/home/brewer/Projects/Forks/celerite/cpp/include/
 
 default:
-	$(CC) -I$(DNEST4_PATH) $(CXXFLAGS) -c *.cpp
-	$(CC) -pthread -L$(DNEST4_PATH)/DNest4/code -o main *.o $(LIBS)
+	$(CC) -I$(DNEST4_PATH) -I$(CELERITE_INCLUDE_PATH) $(CXXFLAGS) -c main.cpp MyConditionalPrior.cpp MyModel.cpp test.cpp
+	$(CC) -pthread -L$(DNEST4_PATH)/DNest4/code -o main main.o MyConditionalPrior.o MyModel.o $(LIBS)
+	$(CC) -o test test.o
 	rm *.o
 
