@@ -2,9 +2,9 @@
 # called DNEST4_PATH for this to work.
 
 CC = g++
-CXXFLAGS = -std=c++11 -O3 -Wall -Wextra -pedantic -DNDEBUG
+CXXFLAGS = -std=c++14 -O3
 LIBS = -ldnest4 -lpthread
-CELERITE_INCLUDE_PATH=/home/brewer/Projects/Forks/celerite/cpp/include/
+CELERITE_INCLUDE_PATH=/home/brendon/Projects/Forks/celerite/cpp/include/
 
 default:
 	$(CC) -I$(DNEST4_PATH) -I$(CELERITE_INCLUDE_PATH) $(CXXFLAGS) -c Data.cpp main.cpp MyConditionalPrior.cpp MyModel.cpp test.cpp
