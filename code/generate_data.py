@@ -22,7 +22,7 @@ show()
 
 # Log likelihood
 y = matrix(data[:,1]).T
-for i in xrange(0, len(t)):
+for i in range(0, len(t)):
   C[i, i] += 0.1**2
 L = cholesky(C)
 logl = -0.5*len(t)*log(2*pi) - 0.5*2*sum(log(diag(L))) - 0.5*y.T*inv(C)*y
