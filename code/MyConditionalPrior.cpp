@@ -39,19 +39,31 @@ double MyConditionalPrior::perturb_hyperparameters(DNest4::RNG& rng)
     return logH;
 }
 
+// component = {amplitude, period}
 double MyConditionalPrior::log_pdf(const std::vector<double>& vec) const
 {
-    return 0.;
+    double logP = 0.0;
+
+    if(vec[0] < 0.0)
+        return -1E300;
+    if(vec[1] < min_period || vec[1] > max_period)
+        return -1E300;
+
+    logP += -log(scale_amplitude) - vec[0] / scale_amplitude;
+
+    return logP;
 }
 
 void MyConditionalPrior::from_uniform(std::vector<double>& vec) const
 {
-
+    vec[0] = -scale_amplitude * log(1.0 - vec[0]);
+    vec[1] = min_period + (max_period - min_period)*vec[1];
 }
 
 void MyConditionalPrior::to_uniform(std::vector<double>& vec) const
 {
-
+    vec[0] = 1.0 - exp(-vec[0] / scale_amplitude);
+    vec[1] = (vec[1] - min_period) / (max_period - min_period);
 }
 
 void MyConditionalPrior::print(std::ostream& out) const
