@@ -78,6 +78,8 @@ double MyModel::log_likelihood() const
             b(j+1) = 0.0;
             c(j)   = omega0/(2*Q)*(1.0 - Qterm);
             c(j+1) = omega0/(2*Q)*(1.0 + Qterm);
+            d(j)   = 0.0;
+            d(j+1) = 0.0;
             j += 2;
         }
     }
