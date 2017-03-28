@@ -49,7 +49,7 @@ void Data::load(const char* filename)
     {
         tt(i) = t[i];
         yy(i) = y[i];
-        var(i) = 1.0 / (sig[i] * sig[i]);
+        var(i) = sig[i] * sig[i];
     }
 }
 
