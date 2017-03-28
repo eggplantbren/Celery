@@ -11,6 +11,8 @@ const DNest4::Cauchy MyConditionalPrior::cauchy(0.0, 5.0);
 MyConditionalPrior::MyConditionalPrior(double min_period, double max_period)
 :min_period(min_period)
 ,max_period(max_period)
+,min_quality(1.0)
+,max_quality(100.0)
 {
     if(max_period <= min_period)
         throw std::invalid_argument("Invalid input to MyConditionalPrior \
@@ -39,7 +41,7 @@ double MyConditionalPrior::perturb_hyperparameters(DNest4::RNG& rng)
     return logH;
 }
 
-// component = {amplitude, period}
+// component = {amplitude, period, quality}
 double MyConditionalPrior::log_pdf(const std::vector<double>& vec) const
 {
     double logP = 0.0;
@@ -47,6 +49,8 @@ double MyConditionalPrior::log_pdf(const std::vector<double>& vec) const
     if(vec[0] < 0.0)
         return -1E300;
     if(vec[1] < min_period || vec[1] > max_period)
+        return -1E300;
+    if(vec[2] < min_quality || vec[2] > max_quality)
         return -1E300;
 
     logP += -log(scale_amplitude) - vec[0] / scale_amplitude;
@@ -58,12 +62,14 @@ void MyConditionalPrior::from_uniform(std::vector<double>& vec) const
 {
     vec[0] = -scale_amplitude * log(1.0 - vec[0]);
     vec[1] = min_period + (max_period - min_period)*vec[1];
+    vec[2] = min_quality + (max_quality - min_quality)*vec[2];
 }
 
 void MyConditionalPrior::to_uniform(std::vector<double>& vec) const
 {
     vec[0] = 1.0 - exp(-vec[0] / scale_amplitude);
     vec[1] = (vec[1] - min_period) / (max_period - min_period);
+    vec[2] = (vec[2] - min_quality) / (max_quality - min_quality);
 }
 
 void MyConditionalPrior::print(std::ostream& out) const

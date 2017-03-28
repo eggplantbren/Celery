@@ -18,6 +18,9 @@ class MyConditionalPrior:public DNest4::ConditionalPrior
         // Scale parameter for amplitudes.
         double scale_amplitude;
 
+        // Minimum and maximum quality factor
+        double min_quality, max_quality;
+
         double perturb_hyperparameters(DNest4::RNG& rng);
 
     public:
