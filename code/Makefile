@@ -2,13 +2,12 @@
 # called DNEST4_PATH for this to work.
 
 CC = g++
-CXXFLAGS = -std=c++14 -O3
-LIBS = -ldnest4 -lpthread
+CXXFLAGS = -std=c++14 -O3 -DWITH_LAPACK
+LIBS = -ldnest4 -lpthread -llapack -lblas
 CELERITE_INCLUDE_PATH=/home/brendon/Projects/Forks/celerite/cpp/include/
 
 default:
-	$(CC) -I$(DNEST4_PATH) -I$(CELERITE_INCLUDE_PATH) $(CXXFLAGS) -c Data.cpp main.cpp MyConditionalPrior.cpp MyModel.cpp test.cpp
-	$(CC) -pthread -L$(DNEST4_PATH)/DNest4/code -o main Data.o main.o MyConditionalPrior.o MyModel.o $(LIBS)
-	$(CC) -o test test.o
+	$(CC) -I$(DNEST4_PATH) -I$(CELERITE_INCLUDE_PATH) $(CXXFLAGS) -c *.cpp
+	$(CC) -pthread -L$(DNEST4_PATH)/DNest4/code -o main *.o $(LIBS)
 	rm *.o
 
