@@ -6,12 +6,11 @@ namespace Celery
 {
 
 MyModel::MyModel()
-:modes(3,        // Dimensionality of a component
-       10,       // Maximum number of components
-       false,    // Fixed number of components?
-       MyConditionalPrior(0.0,      // Conditional prior
-                          Data::get_instance().get_t_range()),
-       DNest4::PriorType::log_uniform)
+:modes(3,                               // Dimensionality of a component
+       10,                              // Maximum number of components
+       false,                           // Fixed number of components?
+       MyConditionalPrior(),            // Conditional prior
+       DNest4::PriorType::log_uniform)  // Prior on N
 {
 
 }

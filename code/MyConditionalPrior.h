@@ -16,11 +16,12 @@ class MyConditionalPrior:public DNest4::ConditionalPrior
         // A standard normal distribution
         static const boost::math::normal normal;
 
-        // Minimum and maximum allowable period
-        double min_period, max_period;
-
         // Scale parameter for amplitudes.
         double scale_amplitude;
+
+        // Median period
+        double mu_period;
+        double sig_log_period;
 
         // Median quality factor
         double mu_quality;
@@ -29,7 +30,7 @@ class MyConditionalPrior:public DNest4::ConditionalPrior
         double perturb_hyperparameters(DNest4::RNG& rng);
 
     public:
-        MyConditionalPrior(double min_period, double max_period);
+        MyConditionalPrior();
 
         void from_prior(DNest4::RNG& rng);
 
