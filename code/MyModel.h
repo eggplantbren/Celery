@@ -4,6 +4,7 @@
 #include "DNest4/code/DNest4.h"
 #include "MyConditionalPrior.h"
 #include <ostream>
+#include "celerite/celerite.h"
 
 namespace Celery
 {
@@ -11,7 +12,10 @@ namespace Celery
 class MyModel
 {
     private:
+        DNest4::RJObject<MyConditionalPrior> modes;
 
+        // Celerite solver
+        celerite::solver::BandSolver<double> solver;
 
     public:
         // Constructor only gives size of params
