@@ -1,6 +1,7 @@
 #ifndef Celery_MyConditionalPrior
 #define Celery_MyConditionalPrior
 
+#include <boost/math/distributions/normal.hpp>
 #include "DNest4/code/DNest4.h"
 
 namespace Celery
@@ -12,14 +13,18 @@ class MyConditionalPrior:public DNest4::ConditionalPrior
         // A cauchy distribution
         static const DNest4::Cauchy cauchy;
 
+        // A standard normal distribution
+        static const boost::math::normal normal;
+
         // Minimum and maximum allowable period
         double min_period, max_period;
 
         // Scale parameter for amplitudes.
         double scale_amplitude;
 
-        // Minimum and maximum quality factor
-        double min_quality, max_quality;
+        // Median quality factor
+        double mu_quality;
+        double sig_log_quality;
 
         double perturb_hyperparameters(DNest4::RNG& rng);
 
