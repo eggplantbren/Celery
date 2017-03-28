@@ -51,7 +51,8 @@ double MyConditionalPrior::perturb_hyperparameters(DNest4::RNG& rng)
         mu_period += log(1E6)*rng.randh();
         DNest4::wrap(mu_period,
                      log(1E-6*Data::get_instance().get_t_range()),
-                     log(Data::get_instance().get_t_range())); 
+                     log(Data::get_instance().get_t_range()));
+        mu_period = exp(mu_period);
     }
     else if(which == 2)
     {
