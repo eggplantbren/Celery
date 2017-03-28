@@ -6,10 +6,11 @@ namespace Celery
 {
 
 MyModel::MyModel()
-:modes(3,       // Dimensionality of a component
-       10,      // Maximum number of components
-       false,   // Fixed number of components?
-       MyConditionalPrior(0.0, 1.0),    // Conditional prior
+:modes(2,        // Dimensionality of a component
+       10,       // Maximum number of components
+       false,    // Fixed number of components?
+       MyConditionalPrior(0.0,      // Conditional prior
+                          Data::get_instance().get_t_range()),
        DNest4::PriorType::log_uniform)
 {
 
@@ -50,7 +51,7 @@ double MyModel::log_likelihood() const
         a(i) = components[i][0];                // Amplitude
         b(i) = 0.0;                             // Always zero for oscillations
         c(i) = 1.0 / mode_lifetime;             // 1 / (mode lifetime)
-        d(i) = 2.0 * M_PI / components[i][1];   // Period
+        d(i) = 2.0 * M_PI / components[i][1];   // Angular frequency
     }
 
     // Grab the data

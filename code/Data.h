@@ -22,10 +22,13 @@ class Data
         const std::vector<double>& get_y() const { return y; }
         const std::vector<double>& get_sig() const { return sig; }
 
+        // Getters of eigen vectors
         const Eigen::VectorXd& get_tt() const { return tt; }
         const Eigen::VectorXd& get_yy() const { return yy; }
         const Eigen::VectorXd& get_var() const { return var; }
 
+        // Summaries
+        double get_t_range() const { return (t.back() - t[0]); }
 
     // Singleton
     private:
