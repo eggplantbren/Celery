@@ -38,17 +38,48 @@ double MyModel::log_likelihood() const
     const auto& components = modes.get_components();
     size_t num_modes = components.size();
 
+    // Count number of modes with Q < 0.5,
+    // as these need *two* Celerite terms.
+    size_t lowQ = 0;
+    for(size_t i=0; i<components.size(); ++i)
+        if(components[i][2] <= 0.5)
+            ++lowQ;
+
     // Only need these four
-    Eigen::VectorXd a(num_modes);
-    Eigen::VectorXd b(num_modes);
-    Eigen::VectorXd c(num_modes);
-    Eigen::VectorXd d(num_modes);
+    Eigen::VectorXd a(num_modes + lowQ);
+    Eigen::VectorXd b(num_modes + lowQ);
+    Eigen::VectorXd c(num_modes + lowQ);
+    Eigen::VectorXd d(num_modes + lowQ);
+
+    // Note: amplitude = S0*omega0*Q
+    double omega0, Q, Qterm;
+    size_t j=0; // Celerite term index
+
     for(size_t i=0; i<components.size(); ++i)
     {
-        a(i) = components[i][0];                // Amplitude
-        b(i) = 0.0;                             // Always zero for oscillations
-        c(i) = 1.0 / (components[i][1]*components[i][2]); // 1 / (mode lifetime)
-        d(i) = 2.0 * M_PI / components[i][1];   // Angular frequency
+        omega0 = 2.0*M_PI/components[i][1];
+        Q = components[i][2];
+
+        if(Q >= 0.5)
+        {
+            Qterm = sqrt(4*Q*Q - 1.0);
+            a(j) = components[i][0];
+            b(j) = components[i][0] / Qterm;
+            c(j) = omega0 / (2*Q);
+            d(j) = c(j) * Qterm;
+            ++j;
+        }
+        else
+        {
+            Qterm = sqrt(1.0 - 4*Q*Q);
+            a(j)   = 0.5*components[i][0]*(1.0 + 1.0/Qterm);
+            a(j+1) = 0.5*components[i][0]*(1.0 - 1.0/Qterm);
+            b(j) = 0.0;
+            b(j+1) = 0.0;
+            c(j)   = omega0/(2*Q)*(1.0 - Qterm);
+            c(j+1) = omega0/(2*Q)*(1.0 + Qterm);
+            j += 2;
+        }
     }
 
     // Grab the data
