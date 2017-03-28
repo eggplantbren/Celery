@@ -1,7 +1,7 @@
 from pylab import *
 
 seed(0)
-t = sort(1000*rand(501))
+t = sort(5000*rand(2001))
 
 [t1, t2] = meshgrid(t, t)
 dt = t1 - t2
