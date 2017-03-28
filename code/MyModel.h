@@ -14,9 +14,6 @@ class MyModel
     private:
         DNest4::RJObject<MyConditionalPrior> modes;
 
-        // Celerite solver
-        celerite::solver::BandSolver<double> solver;
-
     public:
         // Constructor only gives size of params
         MyModel();

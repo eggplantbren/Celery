@@ -41,10 +41,16 @@ void Data::load(const char* filename)
             <<filename<<"."<<std::endl;
     fin.close();
 
-    // Copy into eigen vector
-    y_eigen.resize(y.size());
-    for(size_t i=0; i<y.size(); i++)
-        y_eigen(i) = y[i];
+    // Copy into eigen vectors
+    tt.resize(t.size());
+    yy.resize(y.size());
+    var.resize(sig.size());
+    for(size_t i=0; i<y.size(); ++i)
+    {
+        tt(i) = t[i];
+        yy(i) = y[i];
+        var(i) = 1.0 / (sig[i] * sig[i]);
+    }
 }
 
 } // namespace Celery

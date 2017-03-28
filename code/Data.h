@@ -11,7 +11,7 @@ class Data
 {
     private:
         std::vector<double> t, y, sig;
-        Eigen::VectorXd y_eigen;
+        Eigen::VectorXd tt, yy, var;
 
     public:
         Data();
@@ -20,8 +20,12 @@ class Data
         // Getters
         const std::vector<double>& get_t() const { return t; }
         const std::vector<double>& get_y() const { return y; }
-        const Eigen::VectorXd& get_y_eigen() const { return y_eigen; }
         const std::vector<double>& get_sig() const { return sig; }
+
+        const Eigen::VectorXd& get_tt() const { return tt; }
+        const Eigen::VectorXd& get_yy() const { return yy; }
+        const Eigen::VectorXd& get_var() const { return var; }
+
 
     // Singleton
     private:
