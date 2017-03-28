@@ -7,7 +7,7 @@ namespace Celery
 
 MyModel::MyModel()
 :modes(3,       // Dimensionality of a component
-       100,     // Maximum number of components
+       10,      // Maximum number of components
        false,   // Fixed number of components?
        MyConditionalPrior(0.0, 1.0),    // Conditional prior
        DNest4::PriorType::log_uniform)
@@ -38,7 +38,7 @@ double MyModel::log_likelihood() const
     size_t num_modes = components.size();
 
     // Mode lifetime
-    double mode_lifetime = 0.1;
+    double mode_lifetime = 60.0;
 
     // Only need these four
     Eigen::VectorXd a(num_modes);
@@ -64,6 +64,10 @@ double MyModel::log_likelihood() const
     solver.compute(junk1, junk2,
                    a, b, c, d,
                    data.get_tt(), data.get_var());
+
+    logL += -0.5*log(2*M_PI)*data.get_y().size();
+    logL += -0.5*solver.log_determinant();
+    logL += -0.5*solver.dot_solve(Data::get_instance().get_yy());
 
     return logL;
 }
