@@ -1,13 +1,14 @@
 #include "Data.h"
 #include "MyModel.h"
 #include "DNest4/code/DNest4.h"
+#include <sstream>
 
 namespace Celery
 {
 
 MyModel::MyModel()
 :modes(3,                               // Dimensionality of a component
-       10,                              // Maximum number of components
+       max_num_modes,                   // Maximum number of components
        false,                           // Fixed number of components?
        MyConditionalPrior(),            // Conditional prior
        DNest4::PriorType::log_uniform)  // Prior on N
@@ -77,7 +78,22 @@ void MyModel::print(std::ostream& out) const
 
 std::string MyModel::description() const
 {
-    return std::string("");
+    std::stringstream s;
+
+    s << "num_dimensions, max_num_components, ";
+    s << "scale_amplitude, ";
+    s << "mu_period, sig_log_period, ";
+    s << "mu_quality, sig_log_quality, ";
+    s << "num_components, ";
+
+    for(size_t i=0; i<max_num_modes; ++i)
+        s << "amplitude[" << i << "], ";
+    for(size_t i=0; i<max_num_modes; ++i)
+        s << "period[" << i << "], ";
+    for(size_t i=0; i<max_num_modes; ++i)
+        s << "quality[" << i << "], ";
+
+    return s.str();
 }
 
 } // namespace Celery
