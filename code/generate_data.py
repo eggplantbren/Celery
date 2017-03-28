@@ -5,7 +5,7 @@ t = sort(1000*rand(501))
 
 [t1, t2] = meshgrid(t, t)
 dt = t1 - t2
-C = exp(-abs(dt)/60)*cos(2*pi*abs(dt)/20)
+C = exp(-abs(dt)/1000)*cos(2*pi*abs(dt)/20)
 
 n = matrix(randn(len(t))).T
 L = cholesky(C)
