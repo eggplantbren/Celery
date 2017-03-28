@@ -34,7 +34,7 @@ void Data::load(const char* filename)
         y.push_back(temp2);
         sig.push_back(temp3);
 
-        if(t.size() > 0 && t.back() <= t[t.size() - 2])
+        if(t.size() >= 2 && t.back() <= t[t.size() - 2])
             throw std::invalid_argument("Unsorted t-values in file.");
     }
     std::cout<<"# Loaded "<<t.size()<<" data points from file "
