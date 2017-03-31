@@ -19,13 +19,38 @@ MyModel::MyModel()
 void MyModel::from_prior(DNest4::RNG& rng)
 {
     modes.from_prior(rng);
+    u_boost = rng.rand();
+
+    compute_sigma_boost_factor();
+}
+
+void MyModel::compute_sigma_boost_factor()
+{
+    if(u_boost <= 0.5)
+    {
+        sigma_boost_factor = 1.0;
+    }
+    else
+    {
+        double u = 2*(u_boost - 0.5);
+        sigma_boost_factor = exp(-log(1.0 - u));
+    }
 }
 
 double MyModel::perturb(DNest4::RNG& rng)
 {
     double logH = 0.0;
 
-    logH += modes.perturb(rng);
+    if(rng.rand() <= 0.9)
+    {
+        logH += modes.perturb(rng);
+    }
+    else
+    {
+        u_boost += rng.randh();
+        DNest4::wrap(u_boost, 0.0, 1.0);
+        compute_sigma_boost_factor();
+    }
 
     return logH;
 }
@@ -87,6 +112,12 @@ double MyModel::log_likelihood() const
     // Grab the data
     const Data& data = Data::get_instance();
 
+    // Inflate variance
+    Eigen::VectorXd var = data.get_var();
+    double fsq = pow(sigma_boost_factor, 2);
+    for(int i=0; i<var.size(); ++i)
+        var[i] *= fsq;
+
     // Two empty vectors
     Eigen::VectorXd junk1, junk2;
 
@@ -106,7 +137,8 @@ double MyModel::log_likelihood() const
 void MyModel::print(std::ostream& out) const
 {
     modes.print(out);
-    out<<' ';
+    out << ' ';
+    out << sigma_boost_factor << ' ';
 }
 
 std::string MyModel::description() const
@@ -125,6 +157,8 @@ std::string MyModel::description() const
         s << "period[" << i << "], ";
     for(size_t i=0; i<max_num_modes; ++i)
         s << "quality[" << i << "], ";
+
+    s << "sigma_boost_factor";
 
     return s.str();
 }
