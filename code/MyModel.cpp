@@ -171,7 +171,7 @@ double MyModel::log_likelihood() const
     celerite::solver::BandSolver<double> solver;
     solver.compute(alpha_real, beta_real,
                    a, b, c, d,
-                   data.get_tt(), data.get_var());
+                   data.get_tt(), var);
 
     logL += -0.5*log(2*M_PI)*data.get_y().size();
     logL += -0.5*solver.log_determinant();
