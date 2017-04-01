@@ -14,6 +14,11 @@ end   = indices["quality[0]"]
 all_periods = posterior_sample[:, start:end].flatten()
 all_periods = all_periods[all_periods != 0.0]
 
+# Trim periods
+all_periods.sort()
+start, end = int(0.025*len(all_periods)), int(0.975*len(all_periods))
+all_periods = all_periods[start:end]
+
 # Histogram of inferred periods
 plt.hist(all_periods, 500, color=[0.2, 0.2, 0.4])
 plt.xlabel("Period")
