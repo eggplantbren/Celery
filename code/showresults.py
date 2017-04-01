@@ -20,6 +20,11 @@ plt.xlabel("Period")
 plt.ylabel("Relative probability")
 plt.show()
 
+# Histogram of number of modes
+plt.hist(posterior_sample[:, indices["num_components"]], 100, color=[0.2, 0.2, 0.2])
+plt.xlabel("num_components")
+plt.show()
+
 # Plot the marginal posterior for the error bar boost parameter
 plt.hist(posterior_sample[:, indices["sigma_boost_factor"]], 100, color=[0.2, 0.2, 0.4])
 plt.xlabel("sigma_boost_factor")
