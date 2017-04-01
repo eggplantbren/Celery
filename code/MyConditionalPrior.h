@@ -38,6 +38,9 @@ class MyConditionalPrior:public DNest4::ConditionalPrior
         void from_uniform(std::vector<double>& vec) const;
         void to_uniform(std::vector<double>& vec) const;
 
+        // A getter for one of the hyperparameters
+        double get_scale_amplitude() const { return scale_amplitude; }
+
         void print(std::ostream& out) const;
 };
 

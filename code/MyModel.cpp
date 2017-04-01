@@ -20,8 +20,15 @@ void MyModel::from_prior(DNest4::RNG& rng)
 {
     modes.from_prior(rng);
     u_boost = rng.rand();
-
     compute_sigma_boost_factor();
+
+    // For correlated noise
+    correlated_noise_relative = exp(10*rng.randn());
+    correlated_noise_amplitude = correlated_noise_relative *
+               modes.get_conditional_prior().get_scale_amplitude();
+
+    correlated_noise_timescale = exp(10*rng.randn())*
+                Data::get_instance().get_t_range();
 }
 
 void MyModel::compute_sigma_boost_factor()
@@ -41,15 +48,52 @@ double MyModel::perturb(DNest4::RNG& rng)
 {
     double logH = 0.0;
 
-    if(rng.rand() <= 0.9)
+    int which;
+    if(rng.rand() <= 0.7)
+        which = 0;
+    else
+        which = 1;
+
+    if(which == 0)
     {
         logH += modes.perturb(rng);
+
+        // Recompute derived quantity
+        correlated_noise_amplitude = correlated_noise_relative *
+              modes.get_conditional_prior().get_scale_amplitude();
     }
     else
     {
-        u_boost += rng.randh();
-        DNest4::wrap(u_boost, 0.0, 1.0);
-        compute_sigma_boost_factor();
+        int which2 = rng.rand_int(3);
+
+        if(which2 == 0)
+        {
+            u_boost += rng.randh();
+            DNest4::wrap(u_boost, 0.0, 1.0);
+            compute_sigma_boost_factor();
+        }
+        else if(which2 == 1)
+        {
+            double& x = correlated_noise_relative;
+            x = log(x);
+            logH -= -0.5*pow(x / 10.0, 2);
+            x += 10.0 * rng.randh();
+            logH += -0.5*pow(x / 10.0, 2);
+            x = exp(x);
+
+            // Recompute derived quantity
+            correlated_noise_amplitude = correlated_noise_relative *
+                  modes.get_conditional_prior().get_scale_amplitude();
+        }
+        else
+        {
+            double& x = correlated_noise_timescale;
+            x = log(x / Data::get_instance().get_t_range());
+            logH -= -0.5*pow(x / 10.0, 2);
+            x += 10.0 * rng.randh();
+            logH += -0.5*pow(x / 10.0, 2);
+            x = exp(x) * Data::get_instance().get_t_range();
+        }
     }
 
     return logH;
@@ -118,12 +162,14 @@ double MyModel::log_likelihood() const
     for(int i=0; i<var.size(); ++i)
         var[i] *= fsq;
 
-    // Two empty vectors
-    Eigen::VectorXd junk1, junk2;
+    // For the correlated noise
+    Eigen::VectorXd alpha_real(1), beta_real(1);
+    alpha_real(0) = correlated_noise_amplitude;
+    beta_real(0)  = 1.0 / correlated_noise_timescale;
 
     // Celerite solver
     celerite::solver::BandSolver<double> solver;
-    solver.compute(junk1, junk2,
+    solver.compute(alpha_real, beta_real,
                    a, b, c, d,
                    data.get_tt(), data.get_var());
 
@@ -139,6 +185,8 @@ void MyModel::print(std::ostream& out) const
     modes.print(out);
     out << ' ';
     out << sigma_boost_factor << ' ';
+    out << correlated_noise_amplitude << ' ';
+    out << correlated_noise_timescale << ' ';
 }
 
 std::string MyModel::description() const
@@ -158,7 +206,8 @@ std::string MyModel::description() const
     for(size_t i=0; i<max_num_modes; ++i)
         s << "quality[" << i << "], ";
 
-    s << "sigma_boost_factor";
+    s << "sigma_boost_factor, ";
+    s << "correlated_noise_amplitude, correlated_noise_timescale";
 
     return s.str();
 }

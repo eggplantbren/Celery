@@ -13,15 +13,20 @@ class MyModel
 {
     private:
         // Maximum number of modes
-        static constexpr size_t max_num_modes = 50;
+        static constexpr size_t max_num_modes = 30;
 
         // The modes
         DNest4::RJObject<MyConditionalPrior> modes;
 
-        // Error bar boost coordinate
+        // Error bar boost parameter
         double u_boost;
         double sigma_boost_factor;
         void compute_sigma_boost_factor();
+
+        // For correlated noise
+        double correlated_noise_relative;
+        double correlated_noise_amplitude;
+        double correlated_noise_timescale;
 
     public:
         // Constructor only gives size of params
