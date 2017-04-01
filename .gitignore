@@ -1,3 +1,5 @@
 code/main
 code/__pycache__
 code/*.txt
+code/Celery
+code/logfile
