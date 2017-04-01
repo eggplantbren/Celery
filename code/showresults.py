@@ -15,8 +15,13 @@ all_periods = posterior_sample[:, start:end].flatten()
 all_periods = all_periods[all_periods != 0.0]
 
 # Histogram of inferred periods
-plt.hist(all_periods, 300, color=[0.2, 0.2, 0.2])
+plt.hist(all_periods, 500, color=[0.2, 0.2, 0.4])
 plt.xlabel("Period")
 plt.ylabel("Relative probability")
+plt.show()
+
+# Plot the marginal posterior for the error bar boost parameter
+plt.hist(posterior_sample[:, indices["sigma_boost_factor"]], 100, color=[0.2, 0.2, 0.4])
+plt.xlabel("sigma_boost_factor")
 plt.show()
 
