@@ -1,5 +1,6 @@
 import dnest4.classic as dn4
 import matplotlib.pyplot as plt
+import numpy as np
 
 # Run postprocess from DNest4
 dn4.postprocess()
@@ -26,7 +27,14 @@ plt.ylabel("Relative probability")
 plt.show()
 
 # Histogram of number of modes
-plt.hist(posterior_sample[:, indices["num_components"]], 100, color=[0.2, 0.2, 0.2])
+width = 0.7
+bins = np.arange(0, posterior_sample[0, indices["max_num_components"]]+1)\
+        - 0.5*width
+plt.hist(posterior_sample[:, indices["num_components"]],
+         bins,
+         width=width,
+         color=[0.2, 0.2, 0.2],
+         normed=True)
 plt.xlabel("num_components")
 plt.show()
 
