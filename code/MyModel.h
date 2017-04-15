@@ -1,5 +1,5 @@
-#ifndef Celery_Template_MyModel
-#define Celery_Template_MyModel
+#ifndef Celery_MyModel
+#define Celery_MyModel
 
 #include "DNest4/code/DNest4.h"
 #include "MyConditionalPrior.h"
