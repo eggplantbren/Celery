@@ -29,7 +29,7 @@ all_qualities = posterior_sample[:, start:end].flatten()
 all_qualities = all_qualities[all_qualities != 0.0]
 
 # Histogram of inferred log-periods
-plt.hist(np.log10(all_periods), 500, color=[0.2, 0.2, 0.4])
+plt.hist(np.log10(all_periods), 500, alpha=0.5)
 plt.xlabel(r"$\log_{10}$(period)")
 plt.ylabel("Relative probability")
 plt.show()
