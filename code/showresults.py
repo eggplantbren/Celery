@@ -28,30 +28,24 @@ end   = indices["sigma_boost_factor"]
 all_qualities = posterior_sample[:, start:end].flatten()
 all_qualities = all_qualities[all_qualities != 0.0]
 
-# Trim periods
-temp = all_periods.copy()
-temp.sort()
-use = (all_periods >= temp[int(0.01*len(temp))]) & \
-      (all_periods <= temp[int(0.99*len(temp))])
-
-# Histogram of inferred periods
-plt.hist(all_periods[use], 500, color=[0.2, 0.2, 0.4])
-plt.xlabel("Period")
+# Histogram of inferred log-periods
+plt.hist(np.log10(all_periods), 500, color=[0.2, 0.2, 0.4])
+plt.xlabel(r"$\log_{10}$(period)")
 plt.ylabel("Relative probability")
 plt.show()
 
 # Histogram of inferred periods, weighted by amplitude
-plt.hist(all_periods[use], bins=500,
-         weights=all_amplitudes[use], alpha=0.5)
-plt.xlabel("Period")
+plt.hist(np.log10(all_periods), bins=500,
+         weights=all_amplitudes, alpha=0.5)
+plt.xlabel(r"$\log_{10}$(period)")
 plt.ylabel("Relative expected amplitude")
 plt.show()
 
 # Plot period vs. quality factor
-plt.plot(all_periods[use],
-         all_qualities[use],
+plt.plot(np.log10(all_periods),
+         all_qualities,
          ".", markersize=1, alpha=0.1)
-plt.xlabel("Period")
+plt.xlabel(r"$\log_{10}$(period)")
 plt.ylabel("Quality factor")
 plt.show()
 
