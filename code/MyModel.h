@@ -13,7 +13,7 @@ class MyModel
 {
     private:
         // Maximum number of modes
-        static constexpr size_t max_num_modes = 1;
+        static constexpr size_t max_num_modes = 10;
 
         // The modes
         DNest4::RJObject<MyConditionalPrior> modes;
