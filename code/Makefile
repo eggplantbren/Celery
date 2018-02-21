@@ -4,7 +4,7 @@
 CC = g++
 CXXFLAGS = -std=c++14 -O3 -DWITH_LAPACK
 LIBS = -ldnest4 -lpthread -llapack -lblas
-CELERITE_INCLUDE_PATH=/home/brendon/Projects/Forks/celerite/cpp/include/
+CELERITE_INCLUDE_PATH = ../celerite/cpp/include/
 
 default:
 	$(CC) -I$(DNEST4_PATH) -I$(CELERITE_INCLUDE_PATH) $(CXXFLAGS) -c *.cpp

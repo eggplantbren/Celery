@@ -168,8 +168,9 @@ double MyModel::log_likelihood() const
     beta_real(0)  = 1.0 / correlated_noise_timescale;
 
     // Celerite solver
-    celerite::solver::BandSolver<double> solver(true);
-    solver.compute(alpha_real, beta_real,
+    celerite::solver::CholeskySolver<double> solver;
+    solver.compute(0.0,
+                   alpha_real, beta_real,
                    a, b, c, d,
                    data.get_tt(), var);
 
