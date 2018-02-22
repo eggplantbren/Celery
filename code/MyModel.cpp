@@ -168,11 +168,58 @@ double MyModel::log_likelihood() const
     beta_real(0)  = 1.0 / correlated_noise_timescale;
 
     // Celerite solver
+
+
     celerite::solver::CholeskySolver<double> solver;
-    solver.compute(0.0,
-                   alpha_real, beta_real,
-                   a, b, c, d,
-                   data.get_tt(), var);
+
+    try
+    {
+        solver.compute(0.0,
+                       alpha_real, beta_real,
+                       a, b, c, d,
+                       data.get_tt(), var);
+    }
+    catch(...)
+    {
+        return -1E300;
+    }
+//    catch(...)
+//    {
+//        std::cout << "alpha_real: ";
+//        for(int i=0; i<alpha_real.size(); ++i)
+//            std::cout << alpha_real(i) << ' ';
+//        std::cout << std::endl;
+
+//        std::cout << "beta_real: ";
+//        for(int i=0; i<beta_real.size(); ++i)
+//            std::cout << beta_real(i) << ' ';
+//        std::cout << std::endl;
+
+//        std::cout << "a: ";
+//        for(int i=0; i<a.size(); ++i)
+//            std::cout << a(i) << ' ';
+//        std::cout << std::endl;
+
+//        std::cout << "b: ";
+//        for(int i=0; i<b.size(); ++i)
+//            std::cout << b(i) << ' ';
+//        std::cout << std::endl;
+
+//        std::cout << "c: ";
+//        for(int i=0; i<c.size(); ++i)
+//            std::cout << c(i) << ' ';
+//        std::cout << std::endl;
+
+//        std::cout << "d: ";
+//        for(int i=0; i<d.size(); ++i)
+//            std::cout << d(i) << ' ';
+//        std::cout << std::endl;
+
+//        std::cout << "var: ";
+//        for(int i=0; i<var.size(); ++i)
+//            std::cout << var(i) << ' ';
+//        std::cout << std::endl;
+//    }
 
     logL += -0.5*log(2*M_PI)*data.get_y().size();
     logL += -0.5*solver.log_determinant();
