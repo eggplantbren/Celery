@@ -1,11 +1,12 @@
 from pylab import *
 
 seed(0)
-t = sort(100*rand(1001))
+t = sort(500*rand(3001))
 
 [t1, t2] = meshgrid(t, t)
 dt = t1 - t2
-C = cos(2*pi*abs(dt)/20) * exp(-abs(dt)/1000.0)
+C = cos(2*pi*abs(dt)/20) * exp(-abs(dt)/1000.0)\
+        + exp(-abs(dt)/20)
 
 n = matrix(randn(len(t))).T
 L = cholesky(C)

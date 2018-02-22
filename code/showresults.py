@@ -29,23 +29,23 @@ all_qualities = posterior_sample[:, start:end].flatten()
 all_qualities = all_qualities[all_qualities != 0.0]
 
 # Histogram of inferred log-periods
-plt.hist(np.log10(all_periods), 500, alpha=0.5)
+plt.hist(np.log10(all_periods), 500, alpha=0.3)
 plt.xlabel(r"$\log_{10}$(period)")
 plt.ylabel("Relative probability")
 plt.show()
 
 # Histogram of inferred periods, weighted by amplitude
 plt.hist(np.log10(all_periods), bins=500,
-         weights=all_amplitudes, alpha=0.5)
+         weights=all_amplitudes, alpha=0.3)
 plt.xlabel(r"$\log_{10}$(period)")
 plt.ylabel("Relative expected amplitude")
 plt.show()
 
 # Plot period vs. quality factor
-plt.plot(np.log10(all_periods),
-         all_qualities,
-         ".", markersize=1, alpha=0.1)
-plt.xlabel(r"$\log_{10}$(period)")
+plt.loglog(all_periods,
+           all_qualities,
+           "k.", markersize=1, alpha=0.5)
+plt.xlabel("Period")
 plt.ylabel("Quality factor")
 plt.show()
 
@@ -56,13 +56,23 @@ bins = np.arange(0, posterior_sample[0, indices["max_num_components"]]+1)\
 plt.hist(posterior_sample[:, indices["num_components"]],
          bins,
          width=width,
-         color=[0.2, 0.2, 0.2],
+         alpha=0.3,
          normed=True)
 plt.xlabel("num_components")
 plt.show()
 
 # Plot the marginal posterior for the error bar boost parameter
-plt.hist(posterior_sample[:, indices["sigma_boost_factor"]], 100, color=[0.2, 0.2, 0.4])
+plt.hist(posterior_sample[:, indices["sigma_boost_factor"]],
+         30, alpha=0.3)
 plt.xlabel("sigma_boost_factor")
+plt.show()
+
+
+# Plot the joint posterior for the correlated noise
+plt.loglog(posterior_sample[:, indices["correlated_noise_timescale"]],
+           posterior_sample[:, indices["correlated_noise_amplitude"]],
+           "k.", alpha=0.5, markersize=1)
+plt.xlabel("correlated_noise_timescale")
+plt.ylabel("correlated_noise_amplitude")
 plt.show()
 
