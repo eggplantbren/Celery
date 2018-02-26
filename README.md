@@ -8,8 +8,12 @@ DNest4 + Celerite = Celery
 LICENSE: GNU General Public License, version 3.
 http://www.gnu.org/licenses/gpl.txt
 
-To clone and compile, you'll need git and Eigen 3.
-Then do this:
+You'll need: git, Eigen3, a recent C++ compiler, Python (3?), numpy,
+matplotlib, numba.
+
+## Download and compile
+
+Do this:
 
 ```
 git clone --recursive https://github.com/eggplantbren/Celery
@@ -26,6 +30,14 @@ python generate_data.py
 ```
 
 This plots the data and (once you close the first plot) the periodogram.
+The data consists of a single mode with a period of 20 (log10-period of 1.301),
+and a quality factor of 50 (mode lifetime = 20x50 = 1000).
+
+The data also contains red noise and the error bars are too small. The
+modelling assumptions explicitly allow for both of these features.
+
+
+## Running Celery
 
 To run Celery on the example data using 8 threads (recommended), use
 
@@ -39,8 +51,11 @@ minutes (on the example dataset) before doing any postprocessing.
 
 ## Postprocessing
 
-Celery will run for a long time. You can manually terminate it, or you can
-do the postprocessing without terminating the main process. This will require
+Celery will run for a long time. The longer you run it, the more reliable the
+output will be. You can manually terminate it, or you can
+do the postprocessing without terminating the main process.
+
+The postprocessing will require
 that you've installed the DNest4 Python package
 (see [here](https://github.com/eggplantbren/DNest4) for instructions).
 Simply invoke
