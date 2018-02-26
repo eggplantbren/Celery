@@ -1,5 +1,7 @@
 from pylab import *
 
+# This is the script that was used to generate example_data.txt
+
 seed(0)
 t = sort(500*rand(3001))
 
@@ -16,9 +18,9 @@ y += 0.15*randn(len(t))
 
 data = empty((len(t), 3))
 data[:,0], data[:,1], data[:,2] = t, y, 0.1
-savetxt('data.txt', data)
+savetxt('fake_data.txt', data)
 
-plot(data[:,0], data[:,1], 'o')
+plot(data[:,0], data[:,1], '-')
 show()
 
 # Log likelihood
