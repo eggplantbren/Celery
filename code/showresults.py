@@ -2,18 +2,14 @@ import dnest4.classic as dn4
 import matplotlib.pyplot as plt
 import numpy as np
 
+print("Generating DNest4 plots. Close these to continue.")
+
 # Run postprocess from DNest4
 dn4.postprocess()
 
-# Load posterior samples
-print("Generating DNest4 plots. Close these to continue.")
-
-posterior_sample = dn4.my_loadtxt("posterior_sample.txt")
-indices = dn4.load_column_names("posterior_sample.txt")["indices"]
-
 print("Converting posterior samples to YAML for extra convenience.")
-import to_yaml
-to_yaml.to_yaml()
+from to_yaml import posterior_sample, indices, to_yaml
+to_yaml()
 
 # Extract amplitudes
 start = indices["amplitude[0]"]
