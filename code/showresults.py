@@ -29,13 +29,13 @@ all_qualities = posterior_sample[:, start:end].flatten()
 all_qualities = all_qualities[all_qualities != 0.0]
 
 # Histogram of inferred log-periods
-plt.hist(np.log10(all_periods), 500, alpha=0.3)
+plt.hist(np.log10(all_periods), 1000, alpha=0.3)
 plt.xlabel(r"$\log_{10}$(period)")
 plt.ylabel("Relative probability")
 plt.show()
 
 # Histogram of inferred periods, weighted by amplitude
-plt.hist(np.log10(all_periods), bins=500,
+plt.hist(np.log10(all_periods), bins=1000,
          weights=all_amplitudes, alpha=0.3)
 plt.xlabel(r"$\log_{10}$(period)")
 plt.ylabel("Relative expected amplitude")
@@ -63,7 +63,7 @@ plt.show()
 
 # Plot the marginal posterior for the error bar boost parameter
 plt.hist(posterior_sample[:, indices["sigma_boost_factor"]],
-         30, alpha=0.3)
+         100, alpha=0.3)
 plt.xlabel("sigma_boost_factor")
 plt.show()
 

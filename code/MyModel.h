@@ -12,8 +12,9 @@ namespace Celery
 class MyModel
 {
     private:
+
         // Maximum number of modes
-        static constexpr size_t max_num_modes = 5;
+        static constexpr size_t max_num_modes = 200;
 
         // The modes
         DNest4::RJObject<MyConditionalPrior> modes;
