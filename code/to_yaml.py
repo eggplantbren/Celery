@@ -12,10 +12,10 @@ def to_yaml():
     # Open the output file
     f = open("posterior_sample.yaml", "w")
     f.write("# Posterior samples in YAML format.\n")
-    f.write("---\n\n")
+    f.write("---\n")
 
     for i in range(0, posterior_sample.shape[0]):
-
+        f.write("\n")
         f.write("sample[{i}]:".format(i=i) + "\n")
 
         indent = "    - "
