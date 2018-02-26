@@ -1,7 +1,13 @@
 Celery
 ======
 
-DNest4 + Celerite = Celery
+[DNest4](https://github.com/eggplantbren/DNest) +
+[Celerite](https://github.com/dfm/celerite) = *Celery*.
+This program does inference of an unknown
+number of damped, stochastically excited signals from noisy data.
+The basic modelling ideas are covered in
+[this paper](https://arxiv.org/abs/0902.3907), but the technology is
+much better.
 
 (c) 2017, 2018 Brendon J. Brewer
 
