@@ -50,7 +50,8 @@ python showresults.py
 ```
 
 This will generate a bunch of output plots. As you close them, more will appear.
-Posterior samples will also be saved in a YAML
+Posterior samples (currently only a subset of the parameters)
+will also be saved in a YAML
 file for your convenience. These files have passed verification with
 yamllint.
 
