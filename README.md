@@ -14,7 +14,8 @@ much better.
 LICENSE: GNU General Public License, version 3.
 http://www.gnu.org/licenses/gpl.txt
 
-You'll need: git, Eigen3, a recent C++ compiler, Python (3?), numpy,
+You'll need: git, Eigen3, LAPACK (including header files),
+a recent C++ compiler, Python (3?), numpy,
 matplotlib, numba.
 
 ## Download and compile

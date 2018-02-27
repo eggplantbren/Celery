@@ -1,5 +1,5 @@
 CC = g++
-CXXFLAGS = -std=c++14 -O3 -DWITH_LAPACK
+CXXFLAGS = -std=c++11 -O3 -DWITH_LAPACK
 LIBS = -ldnest4 -lpthread -llapack -lblas
 CELERITE_INCLUDE_PATH = ../celerite/cpp/include/
 
