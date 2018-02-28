@@ -1,7 +1,7 @@
 Celery
 ======
 
-[DNest4](https://github.com/eggplantbren/DNest) +
+[DNest4](https://github.com/eggplantbren/DNest4) +
 [Celerite](https://github.com/dfm/celerite) = *Celery*.
 This program does inference of an unknown
 number of damped, stochastically excited signals from noisy data.
@@ -53,7 +53,7 @@ To run Celery on the example data using 8 threads (recommended), use
 ```
 
 Celery will run and you will see
-[DNest4](https://github.com/eggplantbren/DNest4) output. Give it about 20
+DNest4 output. Give it about 20
 minutes (on the example dataset) before doing any postprocessing.
 
 ## Postprocessing
