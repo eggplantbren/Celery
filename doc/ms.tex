@@ -7,12 +7,14 @@
 \usepackage{microtype}
 \usepackage{natbib}
 
+\newcommand{\Cauchy}{\textnormal{Cauchy}}
 \newcommand{\Celery}{{\em Celery}}
 \newcommand{\Exponential}{\textnormal{Exponential}}
 \newcommand{\given}{\,|\,}
 \newcommand{\Laplace}{\textnormal{Laplace}}
 \newcommand{\location}{\textnormal{location}}
 \newcommand{\scale}{\textnormal{scale}}
+\newcommand{\Uniform}{\textnormal{Uniform}}
 
 
 \title{The~\Celery~ model specification}
@@ -45,8 +47,15 @@ A_i &\sim \Exponential(\scale=\mu_A) \\
 \ln Q_i &\sim \Laplace(\location=a_Q, \scale=b_Q)
 \end{align}
 where some hyperparameters relating to periods, amplitudes, and qualities
-have been introduced.
-
+have been introduced. The priors for these hyperparameters are:
+\begin{align}
+\ln a_T   &\sim \Uniform(10^{-6}t_{\rm range}, t_{\rm range}) \\
+\ln b_T   &\sim \Uniform(0, 2)\\
+\ln \mu_A &\sim \Cauchy(\location=0, \scale=5)T(-50, 50) \\
+\ln a_Q   &\sim \Uniform(0, \ln (1000)) \\
+\ln b_Q   &\sim \Uniform(0, 1)
+\end{align}
+The notation $T(,)$ denotes truncation, as in the BUGS language.
 %\begin{thebibliography}{999}
 %\end{thebibliography}
 
