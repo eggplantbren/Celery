@@ -38,6 +38,8 @@ measurements.
 
 \section{Parameters and Hyperparameters}
 
+\subsection{Oscillation parameters and hyperparameters}
+
 Let the unknown parameters be $M$, the number of oscillation modes,
 $\boldsymbol{T} = \{T_1, T_2, ..., T_M\}$ their periods,
 $\boldsymbol{A} = \{A_1, A_2, ..., A_M\}$ their amplitudes,
@@ -66,6 +68,13 @@ have been introduced. The priors for these hyperparameters are:
 \ln b_Q   &\sim \Uniform(0, 1)
 \end{align}
 The notation $T(,)$ denotes truncation, as in the BUGS language.
+
+\subsection{``Extra noise'' parameters}
+
+The error bars provided by the observers may or may not be trustworthy, and
+there also might be correlated noise (or non-oscillatory signal) in the data.
+
+\section{Justifications for the choices of priors}
 
 Rough justifications for these choices are as follows:
 \begin{itemize}
