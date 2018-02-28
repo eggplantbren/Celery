@@ -11,13 +11,13 @@
 \newcommand{\Exponential}{\textnormal{Exponential}}
 \newcommand{\given}{\,|\,}
 \newcommand{\Laplace}{\textnormal{Laplace}}
-\newcommand{\location}{\textnormal{\location}}
-\newcommand{\scale}{\textnormal{\scale}}
+\newcommand{\location}{\textnormal{location}}
+\newcommand{\scale}{\textnormal{scale}}
 
 
 \title{The~\Celery~ model specification}
 %\author{Brendon J. Brewer}
-%\date{}
+\date{}
 
 \begin{document}
 \maketitle
@@ -40,10 +40,12 @@ $\boldsymbol{A} = \{A_1, A_2, ..., A_M\}$ their amplitudes,
 and $\boldsymbol{Q} = \{Q_1, Q_2, ..., Q_M\}$ their qualities.
 The priors for these are
 \begin{align}
-\ln T_k &\sim \Laplace(a_T, b_T) \\
-A_k &\sim \Exponential()
+\ln T_i &\sim \Laplace(\location=a_T, \scale=b_T) \\
+A_i &\sim \Exponential(\scale=\mu_A) \\
+\ln Q_i &\sim \Laplace(\location=a_Q, \scale=b_Q)
 \end{align}
-
+where some hyperparameters relating to periods, amplitudes, and qualities
+have been introduced.
 
 %\begin{thebibliography}{999}
 %\end{thebibliography}
