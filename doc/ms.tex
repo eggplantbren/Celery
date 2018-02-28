@@ -36,10 +36,20 @@ observers have provided ``error bars''
 $\boldsymbol{\sigma} = \{\sigma_1, \sigma_2, ..., \sigma_n\}$ along with the
 measurements.
 
+\section{Parameters and Hyperparameters}
+
 Let the unknown parameters be $M$, the number of oscillation modes,
 $\boldsymbol{T} = \{T_1, T_2, ..., T_M\}$ their periods,
 $\boldsymbol{A} = \{A_1, A_2, ..., A_M\}$ their amplitudes,
 and $\boldsymbol{Q} = \{Q_1, Q_2, ..., Q_M\}$ their qualities.
+
+The prior for the number of modes $M$ is
+\begin{align}
+p(M) &\propto \frac{1}{M}
+\end{align}
+for $M \in \{0, 1, 2, ..., M_{\rm max}\}$. By default, the maximum number of
+modes is $M_{\rm max} = 30$.
+
 The priors for these are
 \begin{align}
 \ln T_i &\sim \Laplace(\location=a_T, \scale=b_T) \\
@@ -56,6 +66,25 @@ have been introduced. The priors for these hyperparameters are:
 \ln b_Q   &\sim \Uniform(0, 1)
 \end{align}
 The notation $T(,)$ denotes truncation, as in the BUGS language.
+
+Rough justifications for these choices are as follows:
+\begin{itemize}
+    \item The amplitudes, all positive, will be scattered around some typical
+          value, but we don't know it. The data is likely to be supplied
+          in units where amplitudes are probably
+          within a few orders of magnitude of unity.
+    \item The periods, all positive, will be scattered around some typical
+          value we don't know, but the typical period is probably shorter
+          (and possibly much shorter) than the time-range of the measurements.
+          Periods probably don't vary by much more than an order of magnitude.
+    \item The qualities, all positive, will be scattered around some typical
+          value that is probably of order tens to hundreds. The mode qualities
+          are unlikely to differ from each other by a large margin.
+    \item The number of modes is unknown, but for pragmatic computational
+          reasons we weakly favour smaller numbers of modes (the prior
+          is approximately a discrete log-uniform).
+\end{itemize}
+
 %\begin{thebibliography}{999}
 %\end{thebibliography}
 
