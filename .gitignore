@@ -4,3 +4,8 @@ code/*.txt
 code/Celery
 code/logfile
 code/posterior_sample.yaml
+doc/*.aux
+doc/*.toc
+doc/*.pdf
+doc/*.log
+
