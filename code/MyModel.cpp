@@ -1,6 +1,7 @@
 #include "Data.h"
 #include "MyModel.h"
 #include "DNest4/code/DNest4.h"
+#include <iomanip>
 #include <sstream>
 
 namespace Celery
@@ -230,6 +231,7 @@ double MyModel::log_likelihood() const
 
 void MyModel::print(std::ostream& out) const
 {
+    out << std::setprecision(12);
     modes.print(out);
     out << ' ';
     out << sigma_boost_factor << ' ';
