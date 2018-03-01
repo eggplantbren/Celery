@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{330.24302263bp}%
+    \setlength{\unitlength}{337.7889702bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,24 +48,30 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.91037564)%
+  \begin{picture}(1,0.84563216)%
     \put(0,0){\includegraphics[width=\unitlength,page=1]{pgm.pdf}}%
-    \put(-0.0133637,1.06221187){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
-    \put(0.19375029,0.85555552){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$A_{\rm extra}$}}}%
-    \put(0.45705231,0.85359733){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$k$}}}%
-    \put(0.32305556,0.85238066){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$L$}}}%
-    \put(0.10551432,0.50535432){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu_A$}}}%
-    \put(0.44495558,0.54929162){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\boldsymbol{y}$}}}%
-    \put(0.68010207,0.59287971){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\boldsymbol{\sigma}$}}}%
-    \put(0.83552169,0.35565227){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$a_T$}}}%
-    \put(0.68129852,0.48721445){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\boldsymbol{t}$}}}%
-    \put(0.83588743,0.23838002){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$b_T$}}}%
-    \put(0.45990683,0.29053205){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$Q_i$}}}%
-    \put(0.59506509,0.28795965){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$T_i$}}}%
-    \put(0.30386767,0.29120408){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$A_i$}}}%
-    \put(0.03086838,0.2969393){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$M$}}}%
-    \put(0.22952331,0.1849214){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Modes $i$}}}%
-    \put(0.39562159,0.03749146){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$A_Q$}}}%
-    \put(0.50085491,0.03762787){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$B_Q$}}}%
+    \put(0.01151696,1.03848287){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0,0){\includegraphics[width=\unitlength,page=2]{pgm.pdf}}%
+    \put(0.69688404,0.56751278){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.88854392,0.67345006){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.21410752,0.83434938){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.47244914,0.53855363){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{}}}%
+    \put(0.21204168,0.79203668){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$A_{\rm extra}$}}}%
+    \put(0.47142424,0.79012223){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$k$}}}%
+    \put(0.34042088,0.78893275){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$L$}}}%
+    \put(0.12344602,0.53403814){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\mu_A$}}}%
+    \put(0.47193349,0.53589942){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\boldsymbol{y}$}}}%
+    \put(0.68724835,0.59084956){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\boldsymbol{\sigma}$}}}%
+    \put(0.8414389,0.34770727){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$a_T$}}}%
+    \put(0.69066096,0.47633045){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$\boldsymbol{t}$}}}%
+    \put(0.84179647,0.2330548){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$b_T$}}}%
+    \put(0.46977434,0.27960114){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$Q_i$}}}%
+    \put(0.60635391,0.28152686){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$T_i$}}}%
+    \put(0.32610227,0.2846988){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$A_i$}}}%
+    \put(0.02573816,0.2903059){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$M$}}}%
+    \put(0.14875948,0.18153673){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{{\footnotesize Modes $i$}}}}%
+    \put(0.40248455,0.03665393){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$A_Q$}}}%
+    \put(0.50536703,0.0367873){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$B_Q$}}}%
+    \put(0.15005199,0.15351223){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{{\footnotesize for $i \in \{0,...,M_{\rm max}\}$}}}}%
   \end{picture}%
 \endgroup%
