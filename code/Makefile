@@ -9,3 +9,4 @@ default:
 	$(CC) -pthread -L ../DNest4/code -o Celery *.o $(LIBS)
 	rm *.o
 
+

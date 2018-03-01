@@ -78,6 +78,7 @@ The correlated noise is assumed to have a mean parameter of zero
 and an exponential covariance function
 \begin{align}
 C_{\rm extra}(\tau) &= A_{\rm extra}\exp\left(-|\tau| / L\right)
+\label{eqn:red_noise}
 \end{align}
 where $\tau$ is the time separation, and $A_{\rm extra}$, $L$ are
 hyperparameters. The priors for the hyperparameters are
@@ -85,6 +86,15 @@ hyperparameters. The priors for the hyperparameters are
 \ln A_{\rm extra} &\sim \Normal(\location=\mu_A, \scale=10) \\
 \ln L &\sim \Normal(\location=t_{\rm range}, \scale=10)
 \end{align}
+
+The given error bars are considered to be trustworthy with prior probability
+0.5. If not, they are enlarged by some factor greater than one. Let $k$ be
+the factor by which the error bars are inflated. The prior for $k$ is
+\begin{align}
+p(k) &= \frac{1}{2}\delta(k-1) + \frac{1}{2}\frac{1}{x^2}
+\end{align}
+for $k \geq 1$. This is a 50/50 mixture of a delta function at $k=1$
+and a Pareto distribution with a shape parameter of 1.
 
 \section{Justifications for the choices of priors}
 
@@ -109,10 +119,22 @@ Rough justifications for these choices are as follows:
     \item The characteristic timescale of the extra red noise is likely to
           be within several orders of magnitude of the time range of the
           observations.
+    \item The error bar inflation parameter could be 1, or it could be
+          greater than 1 but probably not my many orders of magnitude.
 \end{itemize}
 
-%\begin{thebibliography}{999}
-%\end{thebibliography}
+\section{Conditional prior for the measurements}
+
+The probability distribution for the measurements given the parameters is
+a gaussian process with mean function of zero and covariance matrix given
+by the sum of $M$ quasiperiodic terms (one for each mode, each of which
+has the form as Equation 23 of \citet{celerite}), plus the red noise
+(Equation~\ref{eqn:red_noise}), plus $k\boldsymbol{\sigma}$ on the diagonal.
+
+\begin{thebibliography}{999}
+\bibitem[Foreman-Mackey et al.(2017)]{celerite}
+Foreman-Mackey, D., Agol, E., Ambikasaran, S. and Angus, R., 2017. Fast and scalable Gaussian process modeling with applications to astronomical time series. The Astronomical Journal, 154(6), p.220.
+\end{thebibliography}
 
 \end{document}
 
