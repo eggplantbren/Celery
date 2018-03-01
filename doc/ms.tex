@@ -1,11 +1,13 @@
 \documentclass[a4paper, 12pt]{article}
 \usepackage{amsmath}
 \usepackage{amssymb}
+\usepackage{color}
 \usepackage[left=2cm, right=2cm, bottom=3cm, top=2cm]{geometry}
 \usepackage{graphicx}
 \usepackage[utf8]{inputenc}
 \usepackage{microtype}
 \usepackage{natbib}
+\usepackage{transparent}
 
 \newcommand{\Cauchy}{\textnormal{Cauchy}}
 \newcommand{\Celery}{{\em Celery}}
@@ -135,8 +137,10 @@ has the form as Equation 23 of \citet{celerite}), plus the red noise
 
 \begin{figure}[!ht]
 \centering
-\includegraphics{pgm.pdf}
-\caption{\label{fig:pgm}}
+\input{pgm.pdf_tex}
+\caption{I have omitted arrows
+pointing from the timestamps
+to some of the hyperparameters.\label{fig:pgm}}
 \end{figure}
 
 \begin{thebibliography}{999}
