@@ -13,6 +13,7 @@
 \newcommand{\given}{\,|\,}
 \newcommand{\Laplace}{\textnormal{Laplace}}
 \newcommand{\location}{\textnormal{location}}
+\newcommand{\Normal}{\textnormal{Normal}}
 \newcommand{\scale}{\textnormal{scale}}
 \newcommand{\Uniform}{\textnormal{Uniform}}
 
@@ -73,6 +74,17 @@ The notation $T(,)$ denotes truncation, as in the BUGS language.
 
 The error bars provided by the observers may or may not be trustworthy, and
 there also might be correlated noise (or non-oscillatory signal) in the data.
+The correlated noise is assumed to have a mean parameter of zero
+and an exponential covariance function
+\begin{align}
+C_{\rm extra}(\tau) &= A_{\rm extra}\exp\left(-|\tau| / L\right)
+\end{align}
+where $\tau$ is the time separation, and $A_{\rm extra}$, $L$ are
+hyperparameters. The priors for the hyperparameters are
+\begin{align}
+\ln A_{\rm extra} &\sim \Normal(\location=\mu_A, \scale=10) \\
+\ln L &\sim \Normal(\location=t_{\rm range}, \scale=10)
+\end{align}
 
 \section{Justifications for the choices of priors}
 
@@ -92,6 +104,11 @@ Rough justifications for these choices are as follows:
     \item The number of modes is unknown, but for pragmatic computational
           reasons we weakly favour smaller numbers of modes (the prior
           is approximately a discrete log-uniform).
+    \item The amplitude of the extra red noise is likely to be within
+          several orders of magnitude of the amplitude of the oscillations.
+    \item The characteristic timescale of the extra red noise is likely to
+          be within several orders of magnitude of the time range of the
+          observations.
 \end{itemize}
 
 %\begin{thebibliography}{999}
