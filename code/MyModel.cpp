@@ -10,7 +10,7 @@ namespace Celery
 MyModel::MyModel()
 :modes(3,                               // Dimensionality of a component
        max_num_modes,                   // Maximum number of components
-       false,                           // Fixed number of components?
+       true,                            // Fixed number of components?
        MyConditionalPrior(),            // Conditional prior
        DNest4::PriorType::log_uniform)  // Prior on N
 {
@@ -121,20 +121,20 @@ double MyModel::log_likelihood() const
     Eigen::VectorXd c(num_modes + lowQ);
     Eigen::VectorXd d(num_modes + lowQ);
 
-    // Note: amplitude = S0*omega0*Q
-    double omega0, Q, Qterm;
+    double omega0, Q, Qterm, A2;
     size_t j=0; // Celerite term index
 
     for(size_t i=0; i<components.size(); ++i)
     {
+        double A2 = pow(components[i][0], 2);
         omega0 = 2.0*M_PI/components[i][1];
         Q = components[i][2];
 
         if(Q >= 0.5)
         {
             Qterm = sqrt(4*Q*Q - 1.0);
-            a(j) = components[i][0];
-            b(j) = components[i][0] / Qterm;
+            a(j) = A2; //components[i][0];
+            b(j) = A2/Qterm;
             c(j) = omega0 / (2*Q);
             d(j) = c(j) * Qterm;
             ++j;
@@ -142,8 +142,8 @@ double MyModel::log_likelihood() const
         else
         {
             Qterm = sqrt(1.0 - 4*Q*Q);
-            a(j)   = 0.5*components[i][0]*(1.0 + 1.0/Qterm);
-            a(j+1) = 0.5*components[i][0]*(1.0 - 1.0/Qterm);
+            a(j)   = 0.5*A2*(1.0 + 1.0/Qterm);
+            a(j+1) = 0.5*A2*(1.0 - 1.0/Qterm);
             b(j) = 0.0;
             b(j+1) = 0.0;
             c(j)   = omega0/(2*Q)*(1.0 - Qterm);
@@ -165,12 +165,10 @@ double MyModel::log_likelihood() const
 
     // For the correlated noise
     Eigen::VectorXd alpha_real(1), beta_real(1);
-    alpha_real(0) = correlated_noise_amplitude;
+    alpha_real(0) = pow(correlated_noise_amplitude, 2);
     beta_real(0)  = 1.0 / correlated_noise_timescale;
 
     // Celerite solver
-
-
     celerite::solver::CholeskySolver<double> solver;
 
     try
