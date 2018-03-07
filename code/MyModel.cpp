@@ -10,7 +10,7 @@ namespace Celery
 MyModel::MyModel()
 :modes(3,                               // Dimensionality of a component
        max_num_modes,                   // Maximum number of components
-       true,                            // Fixed number of components?
+       false,                           // Fixed number of components?
        MyConditionalPrior(),            // Conditional prior
        DNest4::PriorType::log_uniform)  // Prior on N
 {
