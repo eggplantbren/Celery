@@ -45,7 +45,7 @@ plt.show()
 # Plot period vs. quality factor
 plt.loglog(all_periods,
            all_qualities,
-           "k.", markersize=1, alpha=0.5)
+           ".", alpha=0.2)
 plt.xlabel("Period")
 plt.ylabel("Quality factor")
 plt.show()
@@ -72,7 +72,7 @@ plt.show()
 # Plot the joint posterior for the correlated noise
 plt.loglog(posterior_sample[:, indices["correlated_noise_timescale"]],
            posterior_sample[:, indices["correlated_noise_amplitude"]],
-           "k.", alpha=0.5, markersize=1)
+           ".", alpha=0.2)
 plt.xlabel("correlated_noise_timescale")
 plt.ylabel("correlated_noise_amplitude")
 plt.show()
