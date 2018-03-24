@@ -11,10 +11,10 @@ class MyConditionalPrior:public DNest4::ConditionalPrior
 {
     private:
         // A cauchy distribution
-        static const DNest4::Cauchy cauchy;
+        DNest4::Cauchy cauchy;
 
         // A standard normal distribution
-        static const boost::math::normal normal;
+        DNest4::Gaussian normal;
 
         // Scale parameter for amplitudes.
         double scale_amplitude;

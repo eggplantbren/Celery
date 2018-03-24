@@ -7,10 +7,9 @@
 namespace Celery
 {
 
-const DNest4::Cauchy MyConditionalPrior::cauchy(0.0, 5.0);
-const boost::math::normal MyConditionalPrior::normal(0.0, 1.0);
-
 MyConditionalPrior::MyConditionalPrior()
+:cauchy(0.0, 5.0)
+,normal(0.0, 1.0)
 {
 
 }
@@ -42,7 +41,10 @@ double MyConditionalPrior::perturb_hyperparameters(DNest4::RNG& rng)
         scale_amplitude = log(scale_amplitude);
         logH += cauchy.perturb(scale_amplitude, rng);
         if(std::abs(scale_amplitude) > 50.0)
+        {
+            scale_amplitude = 1.0;
             return -1E300;
+        }
         scale_amplitude = exp(scale_amplitude);
     }
     else if(which == 1)
@@ -102,10 +104,10 @@ void MyConditionalPrior::from_uniform(std::vector<double>& vec) const
 {
     vec[0] = -scale_amplitude * log(1.0 - vec[0]);
 
-    vec[1] = log(mu_period) + sig_log_period*quantile(normal, vec[1]);
+    vec[1] = log(mu_period) + sig_log_period*normal.cdf_inverse(vec[1]);
     vec[1] = exp(vec[1]);
 
-    vec[2] = log(mu_quality) + sig_log_quality*quantile(normal, vec[2]);
+    vec[2] = log(mu_quality) + sig_log_quality*normal.cdf_inverse(vec[2]);
     vec[2] = exp(vec[2]);
 }
 
@@ -115,11 +117,11 @@ void MyConditionalPrior::to_uniform(std::vector<double>& vec) const
 
     vec[1] = log(vec[1]);
     vec[1] = (vec[1] - log(mu_period)) / sig_log_period;
-    vec[1] = cdf(normal, vec[1]);
+    vec[1] = normal.cdf(vec[1]);
 
     vec[2] = log(vec[2]);
     vec[2] = (vec[2] - log(mu_quality)) / sig_log_quality;
-    vec[2] = cdf(normal, vec[2]);
+    vec[2] = normal.cdf(vec[2]);
 }
 
 void MyConditionalPrior::print(std::ostream& out) const
