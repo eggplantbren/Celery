@@ -58,7 +58,7 @@ plt.hist(posterior_sample[:, indices["num_components"]],
          bins,
          width=width,
          alpha=0.3,
-         normed=True)
+         density=True)
 plt.xlabel("num_components")
 plt.show()
 
