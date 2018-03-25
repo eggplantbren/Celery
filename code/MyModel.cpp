@@ -97,6 +97,12 @@ double MyModel::perturb(DNest4::RNG& rng)
         }
     }
 
+    // Pre-reject
+    if(rng.rand() >= exp(logH))
+        return -1E300;
+    else
+        logH = 0.0;
+
     return logH;
 }
 
