@@ -1,5 +1,4 @@
 from pylab import *
-from numba import jit
 
 # This is the script that was used to generate example_data.txt
 
@@ -23,6 +22,8 @@ L = cholesky(C)
 
 y = (L*n).T
 y += 0.9*randn(len(t))
+y = np.array(y).flatten()
+print(y.shape)
 
 data = empty((len(t), 3))
 data[:,0], data[:,1], data[:,2] = t, y, 0.3
@@ -34,7 +35,6 @@ xlabel("Time")
 ylabel("Measurement")
 show()
 
-@jit
 def periodogram(fs):
     """
     Compute the periodogram.
