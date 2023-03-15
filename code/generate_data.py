@@ -27,8 +27,8 @@ for freq in linspace(0.05, 0.15, 11):
 
 data = empty((len(t), 3))
 data[:,0], data[:,1], data[:,2] = t, y, 0.3
-data[:,1] += randn()
-data[:,2] = 1.0
+data[:,1] += 0.1*randn()
+data[:,2] = 0.1
 savetxt('example_data.txt', data)
 
 figure(figsize=(12,6))
