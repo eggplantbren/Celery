@@ -8,25 +8,27 @@ t = sort(1000*rand(500))
 [t1, t2] = meshgrid(t, t)
 dt = t1 - t2
 
+y = zeros(t.size)
+
 # Amplitude, period, quality
-A, P, Q = 1.0, 10.0, 10.0
-w0 = 2*pi/P
-tau = abs(dt)
-eta = sqrt(1.0 - 1.0/(4.0*Q**2))
-C = A**2*exp(-w0*tau/(2*Q))*\
-        (cos(eta*w0*tau) + sin(eta*w0*tau)/(2.0*eta*Q))\
-        + 1.5**2*exp(-abs(dt)/10)
+for freq in linspace(0.05, 0.15, 11):
+    A, P, Q = 1.0, 1.0/freq, 10.0
+    w0 = 2*pi/P
+    tau = abs(dt)
+    eta = sqrt(1.0 - 1.0/(4.0*Q**2))
+    C = A**2*exp(-w0*tau/(2*Q))*\
+            (cos(eta*w0*tau) + sin(eta*w0*tau)/(2.0*eta*Q))
 
-n = matrix(randn(len(t))).T
-L = cholesky(C)
+    n = matrix(randn(len(t))).T
+    L = cholesky(C)
 
-y = (L*n).T
-y += 0.9*randn(len(t))
-y = np.array(y).flatten()
-print(y.shape)
+    yy = (L*n).T
+    y += np.array(yy).flatten()
 
 data = empty((len(t), 3))
 data[:,0], data[:,1], data[:,2] = t, y, 0.3
+data[:,1] += randn()
+data[:,2] = 1.0
 savetxt('example_data.txt', data)
 
 figure(figsize=(12,6))
@@ -46,7 +48,7 @@ def periodogram(fs):
         pgram[i] = sum(sine*y/data[:,2])**2 + sum(cosine*y/data[:,2])**2
     return pgram/len(fs)
 
-fs = linspace(0.01, 0.2, 1001)
+fs = linspace(0.001, 0.3, 10001)
 pgram = periodogram(fs)
 plot(fs, pgram)
 xlabel("Frequency")
