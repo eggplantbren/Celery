@@ -2,7 +2,7 @@
 #define Celery_Data
 
 #include <vector>
-#include "Eigen/Dense"
+#include <Eigen/Dense>
 
 namespace Celery
 {
