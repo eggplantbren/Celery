@@ -3,7 +3,7 @@ from pylab import *
 # This is the script that was used to generate example_data.txt
 
 seed(0)
-t = sort(1000*rand(500))
+t = sort(2000*rand(500))
 
 [t1, t2] = meshgrid(t, t)
 dt = t1 - t2
@@ -26,8 +26,8 @@ for freq in [0.05]: #linspace(0.05, 0.15, 11):
     y += np.array(yy).flatten()
 
 data = empty((len(t), 3))
-data[:,0], data[:,1], data[:,2] = t, y, 0.1
-data[:,1] += 0.1*randn()
+data[:,0], data[:,1], data[:,2] = t, y, 1.0
+data[:,1] += data[:,2]*randn(data.shape[0])
 savetxt('example_data.txt', data)
 
 figure(figsize=(12,6))
