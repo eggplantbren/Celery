@@ -20,16 +20,16 @@ MyModel::MyModel()
 void MyModel::from_prior(DNest4::RNG& rng)
 {
     modes.from_prior(rng);
-    u_boost = rng.rand();
+    u_boost = 0;
     compute_sigma_boost_factor();
 
-    // For correlated noise
-    correlated_noise_relative = exp(10*rng.randn());
-    correlated_noise_amplitude = correlated_noise_relative *
-               modes.get_conditional_prior().get_scale_amplitude();
+//    // For correlated noise
+//    correlated_noise_relative = exp(10*rng.randn());
+    correlated_noise_amplitude = 0;//correlated_noise_relative *
+//               modes.get_conditional_prior().get_scale_amplitude();
 
-    correlated_noise_timescale = exp(10*rng.randn())*
-                Data::get_instance().get_t_range();
+//    correlated_noise_timescale = exp(10*rng.randn())*
+//                Data::get_instance().get_t_range();
 }
 
 void MyModel::compute_sigma_boost_factor()
@@ -49,19 +49,19 @@ double MyModel::perturb(DNest4::RNG& rng)
 {
     double logH = 0.0;
 
-    int which;
-    if(rng.rand() <= 0.7)
-        which = 0;
-    else
-        which = 1;
+    int which = 0;
+//    if(rng.rand() <= 0.7)
+//        which = 0;
+//    else
+//        which = 1;
 
     if(which == 0)
     {
         logH += modes.perturb(rng);
 
         // Recompute derived quantity
-        correlated_noise_amplitude = correlated_noise_relative *
-              modes.get_conditional_prior().get_scale_amplitude();
+//        correlated_noise_amplitude = correlated_noise_relative *
+//              modes.get_conditional_prior().get_scale_amplitude();
     }
     else
     {
@@ -97,11 +97,11 @@ double MyModel::perturb(DNest4::RNG& rng)
         }
     }
 
-    // Pre-reject
-    if(rng.rand() >= exp(logH))
-        return -1E300;
-    else
-        logH = 0.0;
+//    // Pre-reject
+//    if(rng.rand() >= exp(logH))
+//        return -1E300;
+//    else
+//        logH = 0.0;
 
     return logH;
 }
