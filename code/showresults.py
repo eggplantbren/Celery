@@ -42,6 +42,15 @@ plt.xlabel(r"$\log_{10}$(period)")
 plt.ylabel("Relative expected amplitude")
 plt.show()
 
+# Plot period vs. amplitude
+plt.loglog(all_periods,
+           all_amplitudes,
+           ".", alpha=0.2)
+plt.xlabel("Period")
+plt.ylabel("Amplitude")
+plt.show()
+
+
 # Plot period vs. quality factor
 plt.loglog(all_periods,
            all_qualities,
