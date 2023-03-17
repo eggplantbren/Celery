@@ -62,18 +62,3 @@ plt.hist(posterior_sample[:, indices["num_components"]],
 plt.xlabel("num_components")
 plt.show()
 
-# Plot the marginal posterior for the error bar boost parameter
-plt.hist(posterior_sample[:, indices["sigma_boost_factor"]],
-         100, alpha=0.3)
-plt.xlabel("sigma_boost_factor")
-plt.show()
-
-
-# Plot the joint posterior for the correlated noise
-plt.loglog(posterior_sample[:, indices["correlated_noise_timescale"]],
-           posterior_sample[:, indices["correlated_noise_amplitude"]],
-           ".", alpha=0.2)
-plt.xlabel("correlated_noise_timescale")
-plt.ylabel("correlated_noise_amplitude")
-plt.show()
-

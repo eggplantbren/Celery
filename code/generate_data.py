@@ -11,8 +11,8 @@ dt = t1 - t2
 y = zeros(t.size)
 
 # Amplitude, period, quality
-for freq in [0.1]: #linspace(0.05, 0.15, 11):
-    A, P, Q = 1.0, 1.0/freq, 5.0
+for freq in [0.05]: #linspace(0.05, 0.15, 11):
+    A, P, Q = 7.0, 1.0/freq, 5.0
     w0 = 2*pi/P
     tau = abs(dt)
     eta = sqrt(1.0 - 1.0/(4.0*Q**2))
@@ -26,9 +26,8 @@ for freq in [0.1]: #linspace(0.05, 0.15, 11):
     y += np.array(yy).flatten()
 
 data = empty((len(t), 3))
-data[:,0], data[:,1], data[:,2] = t, y, 0.3
+data[:,0], data[:,1], data[:,2] = t, y, 0.1
 data[:,1] += 0.1*randn()
-data[:,2] = 0.1
 savetxt('example_data.txt', data)
 
 figure(figsize=(12,6))
