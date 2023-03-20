@@ -119,10 +119,6 @@ void MyModel::print(std::ostream& out) const
 {
     out << std::setprecision(12);
     modes.print(out);
-    out << ' ';
-    out << sigma_boost_factor << ' ';
-    out << correlated_noise_amplitude << ' ';
-    out << correlated_noise_timescale << ' ';
 }
 
 std::string MyModel::description() const
@@ -141,9 +137,6 @@ std::string MyModel::description() const
         s << "period[" << i << "], ";
     for(size_t i=0; i<max_num_modes; ++i)
         s << "quality[" << i << "], ";
-
-    s << "sigma_boost_factor, ";
-    s << "correlated_noise_amplitude, correlated_noise_timescale";
 
     return s.str();
 }

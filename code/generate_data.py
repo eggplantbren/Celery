@@ -3,7 +3,7 @@ from pylab import *
 # This is the script that was used to generate example_data.txt
 
 seed(0)
-t = sort(2000*rand(500))
+t = sort(2000*rand(1000))
 
 [t1, t2] = meshgrid(t, t)
 dt = t1 - t2
@@ -11,8 +11,8 @@ dt = t1 - t2
 y = zeros(t.size)
 
 # Amplitude, period, quality
-for freq in [0.05]: #linspace(0.05, 0.15, 11):
-    A, P, Q = 7.0, 1.0/freq, 5.0
+for freq in [0.05, 0.15]:# linspace(0.05, 0.15, 11):
+    A, P, Q = 7.0, 1.0/freq, 25.0
     w0 = 2*pi/P
     tau = abs(dt)
     eta = sqrt(1.0 - 1.0/(4.0*Q**2))

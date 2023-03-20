@@ -25,8 +25,7 @@ all_periods = all_periods[all_periods != 0.0]
 
 # Extract quality factors
 start = indices["quality[0]"]
-end   = indices["sigma_boost_factor"]
-all_qualities = posterior_sample[:, start:end].flatten()
+all_qualities = posterior_sample[:, start:].flatten()
 all_qualities = all_qualities[all_qualities != 0.0]
 
 # Histogram of inferred log-periods
